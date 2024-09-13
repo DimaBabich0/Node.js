@@ -1,0 +1,14 @@
+[
+  {
+    "name": "HP",
+    "price": "1000$",
+    "cpu": "Intel Core I9",
+    "graphic_card": "GeForce GTX 3060"
+  },
+  {
+    "name": "Lenovo",
+    "price": "1200$",
+    "cpu": "AMD Ryzen",
+    "graphic_card": "AMD Radeon RX 7900"
+  }
+]
