@@ -1,0 +1,7 @@
+Time: 15.09.2024, 20:14:45; URL: /; IP: ::1; 
+Time: 15.09.2024, 20:14:50; URL: /category/; IP: ::1; 
+Time: 15.09.2024, 20:14:53; URL: /category/toys; IP: ::1; 
+Time: 15.09.2024, 20:14:58; URL: /category/computer; IP: ::1; 
+Time: 15.09.2024, 20:15:02; URL: /category/tv; IP: ::1; 
+Time: 15.09.2024, 20:15:07; URL: /product/; IP: ::1; 
+Time: 15.09.2024, 20:15:09; URL: /product/hp; IP: ::1; 
