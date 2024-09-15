@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 32px;
+    }
+
+    body {
+      background-color: gray;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      background-color: white;
+      align-items: center;
+      justify-content: center;
+      padding: 3vh;
+      border-radius: 2vh;
+    }
+
+    .container div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1vh;
+    }
+  </style>
+
+  <script>
+    window.onload = function ()
+    {
+      var btn = document.getElementById('btn');
+      var formSignUp = document.getElementById('formSignUp');
+      var container = document.getElementById('output');
+      
+      container.style.display = 'none';
+
+      function makeRequest(data)
+      {
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('POST', 'data');
+
+        xhr.onload = function ()
+        {          
+          formSignUp.style.display = 'none';
+          container.style.display = 'flex';
+
+          container.innerHTML = this.responseText;
+        };
+
+        xhr.onerror = function () {
+          console.log('ERROR');
+        };
+
+        xhr.send(JSON.stringify(data));
+      };
+
+      btn.addEventListener('click', function ()
+      {
+        var userLogin = document.getElementById('login').value;
+        var userPassword = document.getElementById('password').value;
+
+        var answer = {login: userLogin, password: userPassword}
+        makeRequest(answer);
+      });
+    }; 
+  </script>
+</head>
+
+<body>
+  <div id="formSignUp" class="container">
+    <h1>Регистрация</h1>
+    <form method="post" action="http://localhost:8080/">
+      <div>
+        <label for="login">Логин</label>
+        <input id="login" type="text" />
+      </div>
+
+      <div>
+        <label for="password">Пароль</label>
+        <input id="password" type="password" />
+      </div>
+    </form>
+    <div>
+      <button id="btn">Завершить регистрацию</button>
+    </div>
+  </div>
+
+  <div id="output" class="container">
+
+  </div>
+</body>
+
+</html>
