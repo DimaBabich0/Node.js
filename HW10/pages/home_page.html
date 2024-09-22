@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    header {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: rgb(190, 190, 190);
+    }
+
+    .center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+    }
+
+    button {
+      margin-right: 10px;
+      padding: 10px;
+      cursor: pointer;
+      border: none;
+      background-color: #008CBA;
+      color: white;
+      border-radius: 5px;
+    }
+
+    .center button:last-child,
+    .right button:last-child {
+      margin-right: 0;
+    }
+
+    button:hover {
+      background-color: #0078a0;
+    }
+
+    .right button {
+      background-color: #4CAF50;
+    }
+
+    main {
+      background-color: rgb(235, 235, 235);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="left">
+      <h3>Название</h3>
+    </div>
+
+    <div class="center">
+      <button>Домашняя</button>
+      <button>Новости</button>
+      <button>О нас</button>
+    </div>
+
+    <div class="right">
+      <button><a href="/sign_in">Авторизация</a></button>
+      <button><a href="/sign_up">Регистрация</a></button>
+    </div>
+  </header>
+
+  <main>
+    <h2>Домашняя страница</h2>
+  </main>
+</body>
+
+</html>
