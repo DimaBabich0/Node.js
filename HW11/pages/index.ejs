@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<title>App</title>
+	<script>
+		window.onload = function () {
+			var tbody = document.getElementsByTagName('tbody')[0];
+			tbody.addEventListener('click', function (e) {
+				if (e.target.hasAttribute('id')) {
+					if (e.target.classList.contains('edit')) {
+						// запрос для редактирования элемента 
+						var xhr = new XMLHttpRequest();
+						xhr.open('GET', e.target.id);
+						xhr.send();
+						xhr.onload = function () {
+							location.href = 'http://localhost:8080/edit/' + e.target.id;
+						}
+					} else if (e.target.classList.contains('delete')) {
+						// запрос для редактирования элемента 
+						var xhr = new XMLHttpRequest();
+						console.log("test");
+						xhr.open('DELETE', 'delete/' + e.target.id);
+						xhr.send();
+						xhr.onload = function () {
+							location.reload();
+							console.log('item deleted');
+						}
+					}
+				}
+			})
+		}
+	</script>
+</head>
+
+<body>
+  <div class="panel panel-primary">
+    <h1>ToDo List</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <%- categories %>
+        </tr>
+      </thead>
+      <tbody>
+        <%- data %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Проверка наличия кнопок -->
+  <% if (!buttons) { %>
+    <a href="<%= URLS.addUrl %>" class="btn btn-lg btn-info">Add item!</a>
+  <% } else { %>
+    <a href="<%= URLS.addUrl %>" class="btn btn-lg btn-info">Done!</a>
+  <% } %>
+
+  <% if (!buttons) { %>
+    <a href="<%= URLS.editUrl %>" class="btn btn-lg btn-info">Edit items!</a>
+  <% } %>
+</body>
+
+
+</html>
