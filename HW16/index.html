@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Demo Chat</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: rgb(212, 219, 226);
+      overflow-x: hidden;
+    }
+
+    #main-content {
+      display: none;
+    }
+
+    #error-content {
+      display: none;
+    }
+
+    #msg_form {
+      position: absolute;
+      margin-bottom: 0;
+      bottom: 0;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .chat-users {
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .divMessages {
+      height: calc(100vh - 150px);
+      /* Учитывает высоту заголовка и поля ввода */
+      overflow-y: auto;
+      background-color: #f8f9fa;
+      padding: 10px;
+      border: 1px solid #dee2e6;
+    }
+
+    .input-group {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px;
+      background-color: white;
+      border-top: 1px solid #dee2e6;
+    }
+
+    .divMessages {
+      position: relative;
+      height: 80vh;
+      /* Устанавливаем высоту блока */
+      overflow-y: auto;
+      /* Включаем вертикальную прокрутку, если контента больше, чем может поместиться */
+      border: 1px solid #ccc;
+      /* Добавляем границу для визуального выделения */
+      padding: 10px;
+      /* Внутренние отступы */
+    }
+  </style>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</head>
+
+<body>
+  <div class="container" id="nickname-container">
+    <h2>Введите ваш никнейм</h2>
+    <input type="text" id="nickname" placeholder="Ваш никнейм" required>
+    <button onclick="saveNickname()">Продолжить</button>
+    <h3 id="error-content">Пожалуйста, введите никнейм.</h3>
+  </div>
+
+  <div id="main-content">
+    <div class="col-md-3">
+      <div>
+        <h5>Список пользователей:</h5>
+        <ul id="users" class="list-group">
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-12 panel">
+          <h1>Messages</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="divMessages" id="messages"></div>
+        </div>
+      </div>
+      <div class="row" id="msg_form">
+        <div class="col-md-12">
+          <div class="input-group">
+            <input type="text" id="inp" class="form-control input-lg" placeholder="Message..." />
+            <span class="input-group-btn">
+              <button class="btn btn-lg btn-success" type="button" id="btn">Send!</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
