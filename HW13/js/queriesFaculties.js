@@ -47,23 +47,6 @@ module.exports = {
 		})
 
 	},
-	// добавить элемент в бд
-	insertItem: function (data, req, res) {
-		var inserts = {
-			Name: data.Name,
-		}
-		var ps = new mssql.PreparedStatement(connection);
-		ps.input('Name', mssql.VarChar);
-
-		ps.prepare("INSERT INTO Faculties (Name) VALUES (@Name)", function (err) {
-			if (err) console.log(err);
-			var request = ps.execute(inserts, function (err) {
-				console.log(err);
-				console.log('Add item');
-				ps.unprepare();
-			});
-		});
-	},
 	// показать данные для добавления объекта 
 	renderValues: function (req, res) {
 		res.render('add_item_page', { nameTable: this.nameTable, inputs: this.values });

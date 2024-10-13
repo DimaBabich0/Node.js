@@ -5,7 +5,6 @@ var path = require('path');
 var bodyParser = require('body-parser'); 
 var queriesGroups = require('./js/queriesGroups');
 var queriesFaculties = require('./js/queriesFaculties');
-// var queriesGroups = require('./js/queriesGroups');
 
 var port = 8080; 
 
@@ -61,25 +60,6 @@ routerFaculties.route("/delete/:id").delete(function (req, res) {
 app.use("/groups", routerGroup);
 app.use("/faculties", routerFaculties);
 
-
-// // загрузка страницы для создания нового элемента 
-// app.get('/add', insertHandler.loadAddPage);
-
-// // добавить новый элемент 
-// app.post('/add/newItem', insertHandler.addRow);
-
-// // отобразить элементы в режиме редактирования 
-// app.get('/edit', function(req, res) {queries.getAllItems(req, res)});
-
-// // загрузка страницы для редактирования элементов 
-// app.get('/edit/:id', editHandler.loadEditPage);
-
-// // редактирование элемента в бд 
-// app.put('/edit/:id', editHandler.changeItem);
-
-// // удаление элемента из бд 
-// app.delete('/edit/:id', editHandler.removeItem);
-
 // обработка ошибок 
 app.use(function(err, req, res, next) {
 	if (err) console.log(err.stack);
@@ -89,28 +69,3 @@ app.use(function(err, req, res, next) {
 app.listen(port, function() {
 	console.log('app listening on port ' + port);
 });  
-
-// var connection = new mssql.ConnectionPool(config);
-// app.get('/', function (req, res) {
-// 	connection.connect(function (err) {
-// 		// транзакция - безопасная операция над бд с возможностью отката изменений в случае ошибки при выполнении запроса
-// 		var transaction = new mssql.Transaction(connection);
-// 		transaction.begin(function (err) {
-// 			var request = new mssql.Request(transaction);
-// 			request.query("INSERT INTO Accounts (login, password) VALUES ('Login_1', '123')", function (err, data) {
-// 				if (err) {
-// 					console.log(err);
-// 					transaction.rollback(function (err) {
-// 						console.log('rollback successful');
-// 						res.send('transaction rollback successful');
-// 					});
-// 				} else {
-// 					transaction.commit(function (err, data) {
-// 						console.log('data commit success');
-// 						res.send('transaction successful');
-// 					});
-// 				};
-// 			});
-// 		});
-// 	});
-// });
