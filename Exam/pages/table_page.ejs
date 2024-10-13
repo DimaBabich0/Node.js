@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<title>App</title>
+	<script>
+		window.onload = function () {
+			var btnSignOut = document.getElementById('btnSignOut');
+			btnSignOut.addEventListener('click', function () {
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', '/logout', true);
+				xhr.onload = function () {
+					if (xhr.status === 200) {
+						console.log('Logged out successfully');
+						location.href = '/';
+					} else {
+						console.error('Logout failed');
+					}
+				};
+				xhr.send();
+			});
+
+			var tbody = document.getElementsByTagName('tbody')[0];
+			tbody.addEventListener('click', function (e) {
+				if (e.target.hasAttribute('id')) {
+					if (e.target.classList.contains('change')) {
+						var xhr = new XMLHttpRequest();
+						xhr.open('GET', e.target.id);
+						xhr.send();
+						xhr.onload = function () {
+							location.href = `http://localhost:8080/<%- nameTable %>/change/` + e.target.id;
+						};
+					} else if (e.target.classList.contains('delete')) {
+						if (confirm('Вы уверены, что хотите удалить этот объект?')) {
+							var xhr = new XMLHttpRequest();
+							xhr.open('DELETE', 'delete/' + e.target.id);
+							xhr.send();
+							xhr.onload = function () {
+								if (xhr.status === 200) {
+									location.reload();
+									console.log('Объект удален');
+								} else {
+									console.error('Ошибка при удалении объекта');
+								}
+							};
+						} else {
+							console.log('Удаление отменено');
+						}
+					}
+				}
+			});
+		};
+	</script>
+
+</head>
+
+<body>
+	<div class="panel panel-primary">
+		<button value="Log out" class="btn btn-lg btn-danger" id="btnSignOut">Log out</button>
+
+		<h1><%- nameTable %></h1>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<%- categories %>
+				</tr>
+			</thead>
+			<tbody>
+				<%- data %>
+			</tbody>
+		</table>
+	</div>
+
+	<% if (isShowButtons) { %>
+		<a href="<%= URLS.addUrl %>" class="btn btn-lg btn-info">Add item!</a>
+		<% } %>
+</body>
+
+</html>
